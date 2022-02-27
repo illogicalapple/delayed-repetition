@@ -16,7 +16,7 @@ class Thing {
 		if(change) {
 			this.picking.map((e, i) => ({
 				value: e.value,
-				amount: e.amount + (this.weight * (result != i))
+				amount: e.amount + (this.weight * (newArray[result] != e.value))
 			}));
 		}
 		return newArray[result];
