@@ -12,17 +12,22 @@ class Thing {
 		this.picking.forEach(e => {
 			newArray = newArray.concat((new Array(e.amount)).fill(e.value))
 		});
+		console.log(newArray);
 		let result = Math.floor(Math.random() * newArray.length);
 		if(change) {
-			this.picking.map((e, i) => ({
-				value: e.value,
-				amount: e.amount + (this.weight * (e.value != newArray[result]))
-			}));
+			this.picking = this.picking.map((e, i) => {
+				let amount = e.amount + this.weight - 1;
+				if(newArray[result] == e.value) amount -= this.weight - 1;
+				return {
+					value: e.value,
+					amount: amount
+				}
+			});
 		}
 		return newArray[result];
 	}
 	clear() {
-		this.picking.map(e => ({
+		this.picking = this.picking.map(e => ({
 			value: e.value,
 			amount: 1
 		}));
